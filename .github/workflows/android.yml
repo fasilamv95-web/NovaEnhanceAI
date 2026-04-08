@@ -1,0 +1,31 @@
+name: Build APK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Create APK
+        run: |
+          mkdir app
+          echo "NovaEnhance AI placeholder APK" > app/app.apk
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: NovaEnhanceAI
+          path: app/app.apk
